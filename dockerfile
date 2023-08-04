@@ -4,7 +4,7 @@ ENV ESP_IDF_VERSION v4.4.3
 ENV ESP_MATTER_VERSION release/v1.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git cmake ninja python3 \
+    git cmake ninja-build python3 \
     &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
