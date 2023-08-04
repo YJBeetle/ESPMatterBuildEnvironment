@@ -6,6 +6,7 @@ ENV ESP_MATTER_VERSION release/v1.0
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates git cmake ninja-build python3 python3-pip \
     &&\
+    rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 
