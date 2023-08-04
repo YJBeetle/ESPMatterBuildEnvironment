@@ -13,7 +13,7 @@ RUN mkdir /esp
 
 WORKDIR /esp
 
-RUN git clone --recursive --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION &&\
+RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION &&\
     cd esp-idf &&\
     ./install.sh
 
