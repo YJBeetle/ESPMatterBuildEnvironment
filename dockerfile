@@ -38,4 +38,7 @@ RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
     ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 RUN cd esp-matter &&\
-    ./install.sh || cat /esp/esp-matter/connectedhomeip/connectedhomeip/.environment/pigweed-venv/pip-requirements.log
+    rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
+    pip install --upgrade setuptools &&\
+    python -m pip install --upgrade pip &&\
+    ./install.sh || echo "=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=" && cat /esp/esp-matter/connectedhomeip/connectedhomeip/.environment/pigweed-venv/pip-requirements.log
