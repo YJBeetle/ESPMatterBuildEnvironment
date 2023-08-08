@@ -26,7 +26,6 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
-        puthon3-dev \
         python3-venv \
         python3-pip \
         libusb-1.0-0 \
@@ -42,6 +41,12 @@ RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
 
 RUN cd esp-matter &&\
     sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
-    apt-get update && apt-get install -y --no-install-recommends libssl-dev libgirepository1.0-dev libcairo2-dev libreadline-dev && apt-get clean && rm -rf /var/lib/apt/lists/* &&\
+    apt-get update && apt-get install -y --no-install-recommends \
+        python3-dev \
+        libssl-dev \
+        libgirepository1.0-dev \
+        libcairo2-dev \
+        libreadline-dev \
+        && apt-get clean && rm -rf /var/lib/apt/lists/* &&\
     rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
     ./install.sh
