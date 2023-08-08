@@ -39,6 +39,6 @@ RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
 
 RUN cd esp-matter &&\
     rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
-    pip install --upgrade setuptools &&\
-    python -m pip install --upgrade pip &&\
+    python3 -m pip install --upgrade setuptools &&\
+    python3 -m pip install --upgrade pip &&\
     ./install.sh || echo "=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=RBQ=" && cat /esp/esp-matter/connectedhomeip/connectedhomeip/.environment/pigweed-venv/pip-requirements.log
