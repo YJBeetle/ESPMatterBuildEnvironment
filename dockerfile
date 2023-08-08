@@ -38,4 +38,4 @@ RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
     ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 RUN cd esp-matter &&\
-    ./install.sh
+    ./install.sh || cat /esp/esp-matter/connectedhomeip/connectedhomeip/.environment/pigweed-venv/pip-requirements.log
