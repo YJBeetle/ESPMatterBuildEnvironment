@@ -38,5 +38,6 @@ RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
     ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 RUN cd esp-matter &&\
+    sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
     apt-get update && apt-get install -y --no-install-recommends libgirepository-1.0-1 && apt-get clean && rm -rf /var/lib/apt/lists/* &&\
     ./install.sh
