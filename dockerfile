@@ -4,7 +4,7 @@ ENV ESP_IDF_VERSION v4.4.3
 ENV ESP_MATTER_VERSION release/v1.0
 
 # Clone
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         git \
         &&\
@@ -23,7 +23,7 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
 
 # Install
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
         python3-full \
