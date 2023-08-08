@@ -35,6 +35,7 @@ RUN cd esp-idf &&\
     ./install.sh
 
 RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
-    ./scripts/checkout_submodules.py --platform esp32 linux --shallow &&\
-    cd ../.. &&\
+    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
+
+RUN cd esp-matter &&\
     ./install.sh
