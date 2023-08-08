@@ -26,7 +26,8 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
-        python3-full \
+        python3-venv \
+        python3-pip \
         &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
