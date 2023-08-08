@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
         cmake \
         ninja-build \
         python3-full \
+        python3-pip \
         python3-venv \
         &&\
     apt-get clean &&\
