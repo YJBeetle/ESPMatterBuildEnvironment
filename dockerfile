@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-ENV ESP_IDF_VERSION v5.0.1
+ENV ESP_IDF_HASH ea5e0ff298e6257b31d8e0c81435e6d3937f04c7
 ENV ESP_MATTER_VERSION release/v1.1
 
 # Clone
@@ -15,7 +15,10 @@ RUN mkdir /esp
 
 WORKDIR /esp
 
-RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION
+RUN git clone https://github.com/espressif/esp-idf.git &&\
+    cd esp-idf &&\
+    git checkout $ESP_IDF_HASH &&\
+    git submodule update --init --depth 1 --recursive
 
 RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
     cd esp-matter &&\
