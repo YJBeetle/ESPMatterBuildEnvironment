@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
         python3-full \
+        python3-pip \
         &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
