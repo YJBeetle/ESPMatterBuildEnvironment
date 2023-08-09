@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd esp-idf &&\
-    ./install.sh
+    ./install.sh esp32s3
 
 RUN cd esp-matter &&\
     sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
