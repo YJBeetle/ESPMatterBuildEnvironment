@@ -50,6 +50,10 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
     ./install.sh &&\
     rm -rf .git
 
+# fix bitarray version issues
+RUN cd $IDF_PATH &&\
+    ./install.sh esp32c6,esp32h2
+
 COPY entrypoint.sh $IDF_TOOLS_PATH/entrypoint.sh
 ENTRYPOINT ["/opt/esp/entrypoint.sh"]
 CMD ["/bin/bash"]
