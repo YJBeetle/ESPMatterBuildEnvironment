@@ -61,3 +61,7 @@ RUN cd esp-matter &&\
     rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
     . /esp/esp-idf/export.sh &&\
     ./install.sh
+
+WORKDIR /src
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
