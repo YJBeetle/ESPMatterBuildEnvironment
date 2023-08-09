@@ -47,5 +47,5 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
 
 RUN mkdir /src
 WORKDIR /src
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
