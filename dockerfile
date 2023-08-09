@@ -16,13 +16,15 @@ RUN mkdir /esp
 
 WORKDIR /esp
 
-RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION
+RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION &&\
+    rm -rf /esp/esp-idf/.git
 
 RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
     cd esp-matter &&\
     git submodule update --init --depth 1 &&\
     cd connectedhomeip/connectedhomeip &&\
-    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
+    ./scripts/checkout_submodules.py --platform esp32 linux --shallow &&\
+    rm -rf /esp/esp-matter/.git
 
 # Install
 
