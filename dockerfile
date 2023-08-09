@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* &&\
-    rm /usr/lib/python*/EXTERNALLY-MANAGED
+    rm -f /usr/lib/python*/EXTERNALLY-MANAGED
 
 RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION || ( \
         git clone https://github.com/espressif/esp-idf.git &&\
@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git gcc g++ pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/* &&\
-    rm /usr/lib/python*/EXTERNALLY-MANAGED
+    rm -f /usr/lib/python*/EXTERNALLY-MANAGED
 
 RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
     cd esp-matter &&\
