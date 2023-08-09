@@ -1,4 +1,4 @@
-FROM espressif/idf:release-v5.1
+FROM espressif/idf:v5.0.1
 
 ENV MATTER_PATH /opt/esp/matter
 ENV ESP_MATTER_VERSION 1.1
