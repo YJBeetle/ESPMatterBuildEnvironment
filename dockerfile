@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd esp-idf &&\
-    ./install.sh esp32s3
+    ./install.sh
 
 # esp-matter
 RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
