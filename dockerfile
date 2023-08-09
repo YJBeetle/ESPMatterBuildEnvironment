@@ -16,7 +16,12 @@ RUN mkdir /esp
 WORKDIR /esp
 
 # esp-idf
-RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION &&\
+RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION || ( \
+        git clone https://github.com/espressif/esp-idf.git &&\
+        cd esp-idf &&\
+        git checkout $ESP_IDF_VERSION &&\
+        git submodule update --init --depth 1 --recursive &&\
+    ) &&\
     rm -rf /esp/esp-idf/.git
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
