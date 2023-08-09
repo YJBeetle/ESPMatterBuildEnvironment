@@ -6,7 +6,6 @@ ENV ESP_MATTER_VERSION release/v1.1
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         git \
-        python3 \
         &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
@@ -18,14 +17,6 @@ WORKDIR /esp
 SHELL ["/bin/bash", "-c"]
 
 # esp-idf
-RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION || ( \
-        git clone https://github.com/espressif/esp-idf.git &&\
-        cd esp-idf &&\
-        git checkout $ESP_IDF_VERSION &&\
-        git submodule update --init --depth 1 --recursive \
-    ) &&\
-    rm -rf /esp/esp-idf/.git
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
@@ -35,16 +26,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
 
-RUN cd esp-idf &&\
-    ./install.sh
+RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION || ( \
+        git clone https://github.com/espressif/esp-idf.git &&\
+        cd esp-idf &&\
+        git checkout $ESP_IDF_VERSION &&\
+        git submodule update --init --depth 1 --recursive \
+    ) &&\
+    cd esp-idf &&\
+    ./install.sh esp32c6,esp32h2 &&\
+    rm -rf .git
 
 # esp-matter
-RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
-    cd esp-matter &&\
-    git submodule update --init --depth 1 &&\
-    cd connectedhomeip/connectedhomeip &&\
-    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
         python3-pip \
@@ -54,10 +46,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libreadline-dev \
         &&\
     apt-get clean &&\
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* &&\
+    rm /usr/lib/python*/EXTERNALLY-MANAGED
 
-RUN cd esp-matter &&\
-    sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
-    rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
+RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
+    cd esp-matter &&\
+    git submodule update --init --depth 1 &&\
+    cd connectedhomeip/connectedhomeip &&\
+    ./scripts/checkout_submodules.py --platform esp32 linux --shallow &&\
+    sed -i "s|gdbgui.*$||g" scripts/setup/requirements.esp32.txt &&\
+    cd ../.. &&\
     . /esp/esp-idf/export.sh &&\
-    ./install.sh
+    ./install.sh &&\
+    rm -rf .git
+
+WORKDIR /src
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
