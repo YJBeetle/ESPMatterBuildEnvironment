@@ -30,7 +30,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         ninja-build \
         python3-venv \
-        python3-pip \
         libusb-1.0-0 \
         &&\
     apt-get clean &&\
@@ -43,6 +42,7 @@ RUN cd esp-matter &&\
     sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
     apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
+        python3-pip \
         libssl-dev \
         libgirepository1.0-dev \
         libcairo2-dev \
