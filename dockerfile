@@ -33,7 +33,7 @@ RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espr
         git submodule update --init --depth 1 --recursive \
     ) &&\
     cd esp-idf &&\
-    ./install.sh &&\
+    ./install.sh esp32,esp32c2,esp32c3,esp32s2,esp32s3 &&\
     rm -rf .git
 
 # esp-matter
