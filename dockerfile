@@ -48,4 +48,5 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
 RUN mkdir /src
 WORKDIR /src
 COPY entrypoint.sh /
+RUN /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
