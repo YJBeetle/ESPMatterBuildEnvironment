@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-ENV ESP_IDF_VERSION v5.0.1
+ENV ESP_IDF_VERSION ea5e0ff298e6257b31d8e0c81435e6d3937f04c7
 ENV ESP_MATTER_VERSION release/v1.1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
