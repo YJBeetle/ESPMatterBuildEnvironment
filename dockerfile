@@ -23,8 +23,7 @@ RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATT
     cd esp-matter &&\
     git submodule update --init --depth 1 &&\
     cd connectedhomeip/connectedhomeip &&\
-    ./scripts/checkout_submodules.py --platform esp32 linux --shallow &&\
-    rm -rf /esp/esp-matter/.git
+    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 # Install
 
