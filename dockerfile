@@ -7,6 +7,7 @@ ENV ESP_MATTER_VERSION release/v1.1
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         git \
+        python3 \
         &&\
     apt-get clean &&\
     rm -rf /var/lib/apt/lists/*
@@ -19,7 +20,9 @@ RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espr
 
 RUN git clone --depth 1 https://github.com/espressif/esp-matter.git -b $ESP_MATTER_VERSION &&\
     cd esp-matter &&\
-    git submodule update --init --depth 1
+    git submodule update --init --depth 1 &&\
+    cd connectedhomeip/connectedhomeip &&\
+    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 # Install
 
@@ -35,9 +38,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN cd esp-idf &&\
     ./install.sh
-
-RUN cd esp-matter/connectedhomeip/connectedhomeip &&\
-    ./scripts/checkout_submodules.py --platform esp32 linux --shallow
 
 RUN cd esp-matter &&\
     sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
