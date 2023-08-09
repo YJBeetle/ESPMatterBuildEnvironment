@@ -15,6 +15,8 @@ RUN mkdir /esp
 
 WORKDIR /esp
 
+SHELL ["/bin/bash", "-c"]
+
 # esp-idf
 RUN git clone --recursive --shallow-submodules --depth 1 https://github.com/espressif/esp-idf.git -b $ESP_IDF_VERSION || ( \
         git clone https://github.com/espressif/esp-idf.git &&\
