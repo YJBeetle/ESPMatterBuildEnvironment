@@ -57,4 +57,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN cd esp-matter &&\
     sed -i "s|gdbgui.*$||g" connectedhomeip/connectedhomeip/scripts/setup/requirements.esp32.txt &&\
     rm /usr/lib/python*/EXTERNALLY-MANAGED &&\
+    . /esp/esp-idf/export.sh &&\
     ./install.sh
