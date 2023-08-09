@@ -1,5 +1,4 @@
 #!/bin/bash -e
-. /esp/esp-idf/export.sh
-. /esp/esp-matter/export.sh
+. $IDF_PATH/export.sh
+. $MATTER_PATH/export.sh
 exec "$@"
-exit 0
